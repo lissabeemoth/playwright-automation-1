@@ -1,7 +1,7 @@
 import logging
 import allure
 # from settings import *
-from pytest import fixture
+from pytest import fixture, hookimpl
 from playwright.sync_api import Playwright, sync_playwright, expect
 from page_objects.application import App
 
