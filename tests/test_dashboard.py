@@ -1,6 +1,7 @@
 import json
+import allure
 
-
+@allure.step
 def test_dashboard_data(desktop_app_auth):
     payload = json.dumps({"total": 0, "passed": 0, "failed": 0, "norun": 0})
     desktop_app_auth.intercept_request('**/getstat/', payload)
