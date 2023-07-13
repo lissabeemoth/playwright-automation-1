@@ -43,7 +43,7 @@ def pytest_runtest_makereport(item,call):
     setattr((item, f'result_{result.when}', result))
 
 
-@fixture(scope='function', autosave=True)
+@fixture(scope='function', autouse=True)
 def make_screenshots(request):
     yield
     if request.node.result_call.failed:
