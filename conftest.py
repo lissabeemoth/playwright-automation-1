@@ -11,6 +11,7 @@ def preconditions():
     yield
     logging.info('postcondition started')
 
+
 @fixture
 def get_playwright():
     with sync_playwright() as playwright:
