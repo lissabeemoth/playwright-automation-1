@@ -1,4 +1,5 @@
 from pytest import mark
+import allure
 
 ddt = {
     'argnames': 'name,description',
@@ -9,6 +10,7 @@ ddt = {
 }
 
 
+@allure.step
 @mark.parametrize(**ddt)
 def test_new_testcase(desktop_app_auth, name, description):
     desktop_app_auth.navigate_to('Create new test')
@@ -17,6 +19,8 @@ def test_new_testcase(desktop_app_auth, name, description):
     assert desktop_app_auth.test_cases.check_test_exist(name)
     desktop_app_auth.test_cases.delete_test_by_name(name)
 
+
+@allure.step
 def test_testcase_does_not_exist(desktop_app_auth):
     desktop_app_auth.navigate_to('Test Cases')
     assert not desktop_app_auth.test_cases.check_test_exist('hjgjhgjvghgchgvh')
