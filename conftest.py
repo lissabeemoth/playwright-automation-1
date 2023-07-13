@@ -35,7 +35,7 @@ def desktop_app_auth(desktop_app):
     yield app
 
 
-@hookimpl(tryfirst=True, hookwraper=True)
+@hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item,call):
     outcome = yield
     result = outcome.get_result()
@@ -52,6 +52,7 @@ def make_screenshots(request):
                 allure.attach(body=arg.page.screenshot(),
                               name='screenshot',
                               attachment_type=allure.attachment_type.PNG)
+
 
 def pytest_addoption(parser):
     parser.addoption('--secure', action='store', default='secure.json')
