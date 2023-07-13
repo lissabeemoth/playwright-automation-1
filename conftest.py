@@ -20,7 +20,7 @@ def get_playwright():
 
 
 @fixture
-def desktop_app(get_playwright):
+def desktop_app(get_playwright, request):
     app = App(get_playwright, base_url='http://127.0.0.1:8000')
     app.goto('/')
     yield app
@@ -28,7 +28,7 @@ def desktop_app(get_playwright):
 
 
 @fixture
-def desktop_app_auth(desktop_app):
+def desktop_app_auth(desktop_app, request):
     app = desktop_app
     app.goto('/login')
     app.login('alice', 'Qamania123')
@@ -36,11 +36,11 @@ def desktop_app_auth(desktop_app):
 
 
 @hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item,call):
+def pytest_runtest_makereport(item, call):
     outcome = yield
     result = outcome.get_result()
     # setup>>call>>teardown
-    setattr((item, f'result_{result.when}', result))
+    setattr(item, f'result_{result.when}', result)
 
 
 @fixture(scope='function', autouse=True)
